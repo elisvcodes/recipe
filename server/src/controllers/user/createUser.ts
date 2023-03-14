@@ -13,7 +13,7 @@ const createUser = async (req: Request, res: Response) => {
         password: await hashPassword(password),
       },
     });
-    res.status(200).json("success");
+    res.status(200).json({ message: "success", user });
   } catch (error) {
     res.status(400).json(error);
   }
