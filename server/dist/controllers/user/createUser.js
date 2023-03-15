@@ -14,9 +14,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const passwords_1 = require("../../util/passwords");
 const prismaClient_1 = __importDefault(require("../../util/prismaClient"));
-const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const createUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { name, email, password } = req.body;
     try {
+        if (!name || !email || !email)
+            throw Error("Missing fields");
         const user = yield prismaClient_1.default.user.create({
             data: {
                 name: name,
@@ -27,7 +29,8 @@ const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         res.status(200).json({ message: "success", user });
     }
     catch (error) {
-        res.status(400).json(error);
+        console.log(error);
+        res.status(400).send(error.message);
     }
 });
 exports.default = createUser;
