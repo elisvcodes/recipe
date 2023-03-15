@@ -14,7 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const passwords_1 = require("../../util/passwords");
 const prismaClient_1 = __importDefault(require("../../util/prismaClient"));
-const createUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { name, email, password } = req.body;
     try {
         if (!name || !email || !email)

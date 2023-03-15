@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { hashPassword } from "../../util/passwords";
 import prismaClient from "../../util/prismaClient";
 
-const createUser = async (req: Request, res: Response, next: NextFunction) => {
+const createUser = async (req: Request, res: Response) => {
   const { name, email, password } = req.body;
 
   try {
