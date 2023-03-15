@@ -1,5 +1,5 @@
 import { User } from "@prisma/client";
-import jwt from "jsonwebtoken";
+import jwt, { JwtPayload } from "jsonwebtoken";
 
 export const createToken = (user: User) => {
   return jwt.sign({ user: { id: user.id, email: user.email } }, "hello", {
@@ -7,6 +7,12 @@ export const createToken = (user: User) => {
   });
 };
 
-export const verifyToken = (token: string) => {
-  return jwt.verify(token, "hello");
+export const verifyToken = (token: string): any => {
+  return jwt.verify(token, "hello", (err, decodedToken) => {
+    if (err) {
+      return false;
+    } else {
+      return decodedToken;
+    }
+  });
 };

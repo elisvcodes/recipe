@@ -12,7 +12,14 @@ const createToken = (user) => {
 };
 exports.createToken = createToken;
 const verifyToken = (token) => {
-    return jsonwebtoken_1.default.verify(token, "hello");
+    return jsonwebtoken_1.default.verify(token, "hello", (err, decodedToken) => {
+        if (err) {
+            return false;
+        }
+        else {
+            return decodedToken;
+        }
+    });
 };
 exports.verifyToken = verifyToken;
 //# sourceMappingURL=handleJwt.js.map

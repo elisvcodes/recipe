@@ -13,21 +13,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const prismaClient_1 = __importDefault(require("../../util/prismaClient"));
-const createRecipe = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { name } = req.body;
-    const user = req.user;
+const getRecipes = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log(req.user);
     try {
-        yield prismaClient_1.default.recipe.create({
-            data: {
-                name: name,
-                userId: user.id,
-            },
-        });
-        res.status(200).json("success");
+        const recipes = yield prismaClient_1.default.recipe.findMany();
+        res.status(200).json(recipes);
     }
     catch (error) {
         res.status(400).json(error.message);
     }
 });
-exports.default = createRecipe;
-//# sourceMappingURL=createRecipe.js.map
+exports.default = getRecipes;
+//# sourceMappingURL=getRecipes.js.map
